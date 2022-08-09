@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Projeto valor da compra</title>
+    </head>
+    <body>
+        <h3>Projeto valor da compra</h3>
+        <span for="iValorCompra">Insira o valor da compra:</span><br/>
+        <input type="number" id="iValorCompra" />
+        <span for="sOpcaoMoeda">Selecione a moeda:</span><br/>
+        <select id="sOpcaoMoeda">
+            <option value="0" selected>Dólar</option>
+            <option value="1">Euro</option>
+        </select>
+        <span for="sOpcaoPagamento">Selecione a forma de pagamento:</span><br/>
+        <select id="sOpcaoPagamento">
+            <option value="0" selected>Cartão</option>
+            <option value="1">Dinheiro</option>
+        </select>
+        <br/>
+        <button type="button" id="bConverter">Exibir valor convertido</button><br/><br/>
+        <h5>Valores:</h5>
+        <span>Real: R$</span><span id="sResultadoReal"></span><br/>
+        <span id="sMoedaSelecionada"></span><span id="sResultadoMoeda"></span><br/>
+        <span>IOF: </span><span id="sValorIof"></span><br/>
+        <span>Valor final (com IOF): </span><span id="sValorFinal"></span>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
