@@ -1,4 +1,4 @@
-document.onload = function(){
+window.onload = function(){
     document.querySelector("#bConverter").onclick = () => {
         let valorCompra = document.querySelector("#iValorCompra").value;
         
