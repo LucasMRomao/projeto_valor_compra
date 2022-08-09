@@ -16,7 +16,7 @@ window.onload = function(){
             let valorIof = 0;
             let valorFinal;
 
-            document.querySelector("#sResultadoReal").textContent = valorCompra;
+            document.querySelector("#sResultadoReal").textContent = String(valorCompra).replace(".", ",");
 
             let moedas = ['Dólar', 'Euro'];
             document.querySelector("#sMoedaSelecionada").textContent = moedas[opcaoMoeda] + ": ";
@@ -33,12 +33,15 @@ window.onload = function(){
 
             if(opcaoPagamento == '0'){
                 valorIof = valorConvertido * (6.38/100); // * 6.38%
-                document.querySelector("#sValorIof").textContent = valorIof.replace(".", ",");
+                document.querySelector("#sValorIof").textContent = String(valorIof).replace(".", ",");
+            }else{
+                document.querySelector("#sValorIof").textContent = "0,00";
             }
 
             valorFinal = valorConvertido + valorIof;
 
-            document.querySelector("#sValorFinal").textContent = valorFinal.replace(".", ",");
+            document.querySelector("#sResultadoMoeda").textContent = String(valorConvertido).replace(".", ",");
+            document.querySelector("#sValorFinal").textContent = String(valorFinal).replace(".", ",");
         }
     }
 }
