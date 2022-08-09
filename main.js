@@ -22,11 +22,11 @@ window.onload = function(){
             document.querySelector("#sMoedaSelecionada").textContent = moedas[opcaoMoeda] + ": ";
 
             switch(opcaoMoeda){
-                case 0:
+                case '0':
                     valorConvertido = valorCompra * 0.2;
                     break;
                 
-                case 1:
+                case '1':
                     valorConvertido = valorCompra * 0.19;
                     break;
             }
