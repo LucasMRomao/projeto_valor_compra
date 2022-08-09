@@ -1,6 +1,6 @@
 window.onload = function(){
     document.querySelector("#bConverter").onclick = () => {
-        let valorCompra = document.querySelector("#iValorCompra").value;
+        let valorCompra = Number(document.querySelector("#iValorCompra").value);
         
         let sOpcaoMoeda = document.querySelector('#sOpcaoMoeda');
         let opcaoMoeda = sOpcaoMoeda.options[sOpcaoMoeda.selectedIndex].value;
