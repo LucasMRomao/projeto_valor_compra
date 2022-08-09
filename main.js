@@ -23,25 +23,25 @@ window.onload = function(){
 
             switch(opcaoMoeda){
                 case '0':
-                    valorConvertido = valorCompra * 0.2;
+                    valorConvertido = Number(valorCompra * 0.2);
                     break;
                 
                 case '1':
-                    valorConvertido = valorCompra * 0.19;
+                    valorConvertido = Number(valorCompra * 0.19);
                     break;
             }
 
             if(opcaoPagamento == '0'){
                 valorIof = valorConvertido * (6.38/100); // * 6.38%
-                document.querySelector("#sValorIof").textContent = String(valorIof).replace(".", ",");
+                document.querySelector("#sValorIof").textContent = String(valorIof.toFixed(2)).replace(".", ",");
             }else{
                 document.querySelector("#sValorIof").textContent = "0,00";
             }
 
             valorFinal = valorConvertido + valorIof;
 
-            document.querySelector("#sResultadoMoeda").textContent = String(valorConvertido).replace(".", ",");
-            document.querySelector("#sValorFinal").textContent = String(valorFinal).replace(".", ",");
+            document.querySelector("#sResultadoMoeda").textContent = String(valorConvertido.toFixed(2)).replace(".", ",");
+            document.querySelector("#sValorFinal").textContent = String(valorFinal.toFixed(2)).replace(".", ",");
         }
     }
 }
