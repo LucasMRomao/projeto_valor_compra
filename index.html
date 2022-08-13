@@ -4,25 +4,31 @@
     </head>
     <body>
         <h3>Projeto valor da compra</h3>
-        <span for="iValorCompra">Insira o valor da compra:</span><br/>
-        <input type="number" id="iValorCompra" /><br/>
-        <span for="sOpcaoMoeda">Selecione a moeda:</span><br/>
-        <select id="sOpcaoMoeda">
-            <option value="0" selected>Dólar</option>
-            <option value="1">Euro</option>
-        </select><br/>
-        <span for="sOpcaoPagamento">Selecione a forma de pagamento:</span><br/>
-        <select id="sOpcaoPagamento">
-            <option value="0" selected>Cartão</option>
-            <option value="1">Dinheiro</option>
-        </select>
-        <br/>
-        <button type="button" id="bConverter">Exibir valor convertido</button><br/><br/>
-        <h5>Valores:</h5>
-        <span>Real: R$ </span><span id="sResultadoReal"></span><br/>
-        <span id="sMoedaSelecionada"></span><span id="sResultadoMoeda"></span><br/>
-        <span>IOF: </span><span id="sValorIof"></span><br/>
-        <span>Valor final (com IOF): </span><span id="sValorFinal"></span>
+        <div id="app">
+            <span>Insira o valor da compra:</span><br/>
+            <input type="number" v-model="valorCompra" /><br/>
+            <span>Selecione a moeda:</span><br/>
+            <select v-model="moeda">
+                <option value="Dólar:" selected>Dólar</option>
+                <option value="Euro:">Euro</option>
+            </select><br/>
+            <span >Selecione a forma de pagamento:</span><br/>
+            <select v-model="formaPagamento">
+                <option value="0" selected>Cartão</option>
+                <option value="1">Dinheiro</option>
+            </select>
+            <br/><br/>
+            <h5>Valores:</h5>
+            <span>Real: R$ </span>{{resultadoReal}}</span><br/>
+            {{moeda}}&nbsp;{{resultadoMoeda}}</span><br/>
+            <span>IOF: </span>{{valorIof}}<br/>
+            <span>Valor final (com IOF): {{valorFinalComIof}}
+            <br/><br/>
+            {{aguardando}}
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script type="text/javascript" src="main.js"></script>
     </body>
 </html>

@@ -1,47 +1,63 @@
 window.onload = function(){
-    document.querySelector("#bConverter").onclick = () => {
-        let valorCompra = Number(document.querySelector("#iValorCompra").value);
-        
-        let sOpcaoMoeda = document.querySelector('#sOpcaoMoeda');
-        let opcaoMoeda = sOpcaoMoeda.options[sOpcaoMoeda.selectedIndex].value;
 
-        let sOpcaoPagamento = document.querySelector("#sOpcaoPagamento");
-        let opcaoPagamento = sOpcaoPagamento.options[sOpcaoPagamento.selectedIndex].value;
-
-        if(!valorCompra || !opcaoMoeda || !opcaoPagamento){
-            alert("Por favor, insira todas as informações!");
-        }else{
-
-            let valorConvertido;
-            let valorIof = 0;
-            let valorFinal;
-
-            document.querySelector("#sResultadoReal").textContent = String(valorCompra).replace(".", ",");
-
-            let moedas = ['Dólar', 'Euro'];
-            document.querySelector("#sMoedaSelecionada").textContent = moedas[opcaoMoeda] + ": ";
-
-            switch(opcaoMoeda){
-                case '0':
-                    valorConvertido = Number(valorCompra * 0.2);
-                    break;
-                
-                case '1':
-                    valorConvertido = Number(valorCompra * 0.19);
-                    break;
+    var app = new Vue({
+        el: '#app',
+        data: {
+            valorCompra: '',
+            moeda: '',
+            formaPagamento: '',
+            resultadoReal: '',
+            moeda: '',
+            resultadoMoeda: '',
+            valorIof: '',
+            valorFinalComIof: '',
+            aguardando: ''
+        },
+        watch: {
+            valorCompra: function(){
+                this.aguardando = 'Aguardando digitação...';
+                this.debouncedCalculo();
+            },
+            moeda: function(){
+                this.aguardando = 'Calculando...';
+                this.debouncedCalculo();
+            },
+            formaPagamento: function(){
+                this.aguardando = 'Calculando...';
+                this.debouncedCalculo();
             }
+        },
+        created: function() {
+            this.debouncedCalculo = _.debounce(this.calcular, 500);
+        },
+        methods: {
+            calcular: function() {
+                if(!this.valorCompra || !this.moeda || !this.formaPagamento){
+                    this.aguardando = 'Por favor, insira todas as informações!';
+                    return;
+                }
 
-            if(opcaoPagamento == '0'){
-                valorIof = valorConvertido * (6.38/100); // * 6.38%
-                document.querySelector("#sValorIof").textContent = String(valorIof.toFixed(2)).replace(".", ",");
-            }else{
-                document.querySelector("#sValorIof").textContent = "0,00";
+                this.aguardando = '';
+                this.resultadoReal = this.valorCompra;
+
+                switch(this.moeda){
+                    case 'Dólar:':
+                        this.resultadoMoeda = Number(this.valorCompra * 0.2).toFixed(2);
+                        break;
+                    
+                    case 'Euro:':
+                        this.resultadoMoeda = Number(this.valorCompra * 0.19).toFixed(2);
+                        break;
+                }
+
+                if(this.formaPagamento == '0'){
+                    this.valorIof = Number(this.resultadoMoeda * (6.38/100)).toFixed(2); // * 6.38%
+                }else{
+                    this.valorIof = Number(0).toFixed(2);
+                }
+
+                this.valorFinalComIof = Number(Number(this.resultadoMoeda) + Number(this.valorIof)).toFixed(2);
             }
-
-            valorFinal = valorConvertido + valorIof;
-
-            document.querySelector("#sResultadoMoeda").textContent = String(valorConvertido.toFixed(2)).replace(".", ",");
-            document.querySelector("#sValorFinal").textContent = String(valorFinal.toFixed(2)).replace(".", ",");
         }
-    }
+    });
 }
